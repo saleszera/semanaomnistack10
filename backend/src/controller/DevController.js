@@ -10,6 +10,12 @@ module.exports = {
         return response.json(devs);
     },
 
+    async destroy(request, response){
+
+        await Dev.findByIdAndDelete(request.params.id);
+        return response.json({"Mensagem":"Registro excluido com sucesso!"});
+    },
+
     async store(request, response){
 
         const { github_username, techs, latitude, longitude } = request.body;
@@ -22,8 +28,8 @@ module.exports = {
 
             let { name = login, avatar_url, bio } = apiResponse.data;
     
-            console.log(name, avatar_url, bio, github_username);
-    
+            //console.log(name, avatar_url, bio, github_username);
+            
             const techsArray = parseStringAsArray(techs);
     
             const location = {
