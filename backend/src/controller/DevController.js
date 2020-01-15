@@ -10,6 +10,15 @@ module.exports = {
         return response.json(devs);
     },
 
+    async update(request, response){
+
+        const {techs, bio} = request.body;
+        const techsArray = parseStringAsArray(techs);
+
+        const updateDev = await Dev.findByIdAndUpdate(request.params.id, {techsArray, bio}, { new:true });
+        return response.json(updateDev);
+    },
+
     async destroy(request, response){
 
         await Dev.findByIdAndDelete(request.params.id);
