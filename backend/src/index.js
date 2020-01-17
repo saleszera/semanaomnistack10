@@ -4,12 +4,12 @@ const routes = require('./routes');
 const cors = require('cors');
 const app = express();
 
-mongoose.connect("mongodb+srv://<username>:<password>@cluster0-ks7nx.mongodb.net/test?retryWrites=true&w=majority", {
+mongoose.connect("mongodb+srv://<username>:password@cluster0-ks7nx.mongodb.net/test?retryWrites=true&w=majority", {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
 
-app.use(cors({origin: 'http://localhost:3000'}));
+app.use(cors());
 app.use(express.json());
 app.use(routes);
 //HTTP methods: GET, POST, PUT and DELETE

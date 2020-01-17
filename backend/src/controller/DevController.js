@@ -23,7 +23,7 @@ module.exports = {
     async destroy(request, response){
 
         await Dev.findByIdAndDelete(request.params.id);
-        return response.json({"Mensagem":"Registro excluido com sucesso!"});
+        return response.json(Dev);
     },
 
     async store(request, response){
