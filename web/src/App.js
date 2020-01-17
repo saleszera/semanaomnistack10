@@ -8,8 +8,6 @@ import './App.css'
 import './sidebar.css'
 import './main.css'
 
-
-
 function App() {
 
   const [devs, setDevs] = useState([]);
@@ -30,13 +28,20 @@ function App() {
     setDevs([...devs, response.data]);
   }
 
+  // async function handleDeleteDev(data){
+
+  //   const response = await api.delete(`/devs/${data._id}`);
+
+  //   setDevs(devs.filter(dev => dev._id !== response.data._id));
+  // }
+
   return (
     <div id='app'>
       <aside>
         
         <strong>Cadastrar</strong>
 
-        <DevForm onSubmit={handleAddDev} />        
+        <DevForm onSubmit={handleAddDev} />                
 
       </aside>
 
