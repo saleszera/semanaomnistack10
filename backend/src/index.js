@@ -2,9 +2,15 @@ const express = require('express');
 const mongoose = require('mongoose');
 const routes = require('./routes');
 const cors = require('cors');
-const app = express();
+const http = require('http');
+const { setupWebsocket } = require('./websocket');
 
-mongoose.connect("mongodb+srv://<username>:password@cluster0-ks7nx.mongodb.net/test?retryWrites=true&w=majority", {
+const app = express();
+const server = http.Server(app);
+
+setupWebsocket(server);
+
+mongoose.connect("mongodb+srv://<username>:<password>@cluster0-ks7nx.mongodb.net/test?retryWrites=true&w=majority", {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
@@ -12,6 +18,7 @@ mongoose.connect("mongodb+srv://<username>:password@cluster0-ks7nx.mongodb.net/t
 app.use(cors());
 app.use(express.json());
 app.use(routes);
+
 //HTTP methods: GET, POST, PUT and DELETE
 
 //Params types
@@ -19,6 +26,4 @@ app.use(routes);
 //Route params: req.params(identify a resource in modification or removal)
 //Body: req.body(data for creation or modification a resgistry )
 
-
-
-app.listen(3333);
+server.listen(3333);
