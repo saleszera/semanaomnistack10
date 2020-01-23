@@ -25,15 +25,15 @@ function App() {
     const response = await api.post('/devs', data);
 
 
-    setDevs([...devs, response.data]);
+    setDevs([...devs, response.data]);    
   }
 
-  // async function handleDeleteDev(data){
+  async function handleDeleteDev(data){
 
-  //   const response = await api.delete(`/devs/${data._id}`);
-
-  //   setDevs(devs.filter(dev => dev._id !== response.data._id));
-  // }
+    const response = await api.delete(`/devs/${data}`);
+    // console.log(response.data.id);
+    setDevs(devs.filter(dev => dev._id !== response.data.id));
+  }
 
   return (
     <div id='app'>
@@ -49,7 +49,7 @@ function App() {
 
         <ul>
           {devs.map(dev =>(
-            <DevItem key={dev._id} dev={dev} />
+            <DevItem key={dev._id} dev={dev} deleteDev={handleDeleteDev} />
             )
           )
           }     

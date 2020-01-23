@@ -24,7 +24,7 @@ module.exports = {
     async destroy(request, response){
 
         await Dev.findByIdAndDelete(request.params.id);
-        return response.json(Dev);
+        return response.json(request.params);
     },
 
     async store(request, response){

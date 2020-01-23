@@ -3,34 +3,35 @@ import React from 'react';
 
 import './styles.css'
 
-function DevItem({ dev }){
+function DevItem({ dev, deleteDev }){
     
-    // async function handleDeleteDev(){
-    //     const response = await api.delete(`/devs/${dev._id}`);
-    //     console.log(dev._id);
-    //     console.log(response.data)
-    // }
+    async function handleDelete(e){
+        e.preventDefault()
+        const id = dev._id;        
+        await deleteDev(id);
+    }
 
     return(
         <li className="dev-item">
 
             <header>
-
+                
                 <img src={dev.avatar_url} alt={dev.nome}/>
-
+                
                 <div className="user-info">
-
+                    
                     <strong>{dev.github_username}</strong>
                     <span>{dev.techs.join(', ')}</span>
 
-                </div>         
+                </div>               
 
             </header>
 
             <p>{dev.bio}</p>
-            <a href={`https://github.com/${dev.github_username}`}>Acessar perfil no Github</a>          
-
-            {/* <button onClick={handleDeleteDev}>Deletar</button> */}
+            <a href={`https://github.com/${dev.github_username}`}>Acessar perfil no Github</a> 
+            <button onClick={ handleDelete }>Deletar</button>         
+            
+            
 
         </li>
     );
